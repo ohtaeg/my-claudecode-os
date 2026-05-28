@@ -3,3 +3,6 @@
 
 # macOS
 .DS_Store
+
+# Skill usage stats (개인 사용 기록)
+.claude/stats/
