@@ -6,3 +6,6 @@
 
 # Skill usage stats (개인 사용 기록)
 .claude/stats/
+
+# structure-critic 스킬 산출물 (PlantUML 등 개인 분석 결과)
+artifacts/
