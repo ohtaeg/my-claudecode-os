@@ -103,6 +103,18 @@
   - 산출물: `sessions/woowa-nova2-production.md` (TL;DR + 인사이트 9 + 태그 10), README S116 행 노트 컬럼 갱신
 - [ ] `session-note` 정상 흐름 첫 가동 (캐치테이블 S41 등 매핑 일치 케이스)
   - 검증 포인트: yt-dlp 봇 차단 여부, analyzer 품질, 매핑 일치 시 frontmatter 처리
+- [+] **OS 진화 메커니즘 도입**: `interview` 메타 스킬 추가
+  - 트리거: 직전 `session-note` 첫 가동(S116) 흐름이 자연스럽게 "막연한 의도 → 옵션 → 선택 → 검증" 사이클로 진행됨. 이 패턴을 강제하는 메타 스킬 필요. 사용자 가이드 강조 *"모호함을 구체적으로 바꾸는 방법 설계 (여기에 시간 투자 권장)"*
+  - 참고 베이스: [ouroboros](https://github.com/Q00/ouroboros) 의 #the-loop (Interview → Seed → Execute → Evaluate → Evolve)
+  - 결정: ouroboros 베이스로 **Interview + Seed 만 본체 책임**. Execute/Evaluate/Evolve 는 OS 기존 흐름에 위임. 수학 게이트(Ambiguity 공식·Convergence schema 비교) 빼고 **사용자 합의 + 자가 점검 게이트**
+  - 방법론 (이미지 가이드 1번 반영):
+    - 라운드 진단 질문 체크리스트 4개 (숨은 가정 / 깨질 곳 / OS 페인포인트 닿음 / 회고·사례 유사)
+    - 라운드 종료 자가 점검 3개 (행위 단위 / 영향 범위 / 검증 방법)
+  - 산출물:
+    - `.claude/skills/interview/SKILL.md` (신규, frontmatter 포함)
+    - `artifacts/interviews/activity.jsonl` (신규, 별도 로그)
+    - `README.md` §4 새 "🔁 메타" 그룹 추가
+    - `workflow.md` "메타 — OS 진화 여정" 섹션 추가
 - [+] **회고 거리 채집** (Day 8 용):
   - 인자 누락 시 폴백 가이드 부재 (`/conference-status`, `/conference` 공통)
   - `/conference` 출력 길이 (미정 多수 시 UX 갭)

@@ -288,6 +288,41 @@ OS 는 사용자 학습에 끝이 있다고 가정하지 않는다. 다만 각 �
 
 ---
 
+## 메타 — OS 진화 여정 (`/interview`)
+
+위 0~5단계가 *학습 흐름* 이라면, OS 자체를 자라나게 할 때는 인터뷰 메타 스킬을 호출한다.
+
+**상황**
+- 새 스킬 추가 검토 ("이런 스킬 만들고 싶은데")
+- 정책 결정 미루어짐 (`PROJECT.md` 회고 박스의 `[ ]` 항목)
+- 막연한 의도 ("이거 어떻게 할까", "별로일까")
+
+**흐름**
+
+```
+/interview <막연한 의도>
+      ↓
+[Phase 1: Interview] Socratic 라운드 반복
+   R0: 현재 의도 + 진단(4 질문) + 옵션 + 트레이드오프 → 사용자 선택
+   R1: 좁아진 의도 + ... → 사용자 선택
+   ...
+   라운드 종료 시 자가 점검 3개 (행위/영향/검증) ✓ → Phase 2 진입
+      ↓
+[Phase 2: Seed] 결정문 박제
+   artifacts/interviews/<date>-<slug>.md (immutable)
+      ↓
+(별개 흐름) 결정대로 사용자가 다른 스킬 호출
+```
+
+**종료 조건** (OR)
+- 사용자 "충분" 신호 → `decided`
+- 자가 점검 3개 ✓ + 합의 → `decided`
+- 10 라운드 도달 (하드 캡) → `dormant`
+
+**참고 베이스**: [ouroboros](https://github.com/Q00/ouroboros) 의 #the-loop. 본 OS 에선 Interview + Seed 만 본체 책임 (Execute/Evaluate/Evolve 는 OS 기존 흐름에 위임), 수학 게이트(Ambiguity 공식·Convergence schema) → 사용자 합의 + 자가 점검 게이트.
+
+---
+
 ## 한 줄 요약
 
 URL 한 줄 → 행사 README → 분류 마킹 → 관심 세션 골라 학습 노트 → 진척 가시화. 흐지부지를 막는 게 끝이지 OS 가 학습을 종결시키지 않는다.
