@@ -1,6 +1,6 @@
 ---
 name: session-mark
-description: 행사 README 의 특정 세션 분류 상태를 변경할 때 호출. 사용자가 "/session-mark <행사> <세션> <상태>", "이 세션 들음으로 표시", "관심 세션으로 마킹해줘" 등을 요청하면 작동. README 의 해당 행과 진척 카운트를 한 번에 갱신.
+description: 행사 README 의 특정 세션 분류 상태를 변경할 때 호출. 사용자가 "/session-mark <행사> <세션 ID|제목 키워드> <상태>", "이 세션 들음으로 표시", "S51 관심으로 마킹해줘" 등을 요청하면 작동. README 의 해당 행과 진척 카운트를 한 번에 갱신.
 ---
 
 # session-mark
@@ -10,18 +10,25 @@ description: 행사 README 의 특정 세션 분류 상태를 변경할 때 호�
 ## 입력
 
 - 행사 슬러그
-- 세션 식별자 (세션 슬러그 또는 제목 일부)
+- 세션 식별자 — 다음 중 하나:
+  - **세션 ID** (`S1` ~ `SN`) — README 표의 ID 컬럼 값. **가장 권장**
+  - **세션 슬러그** (`catchtable-bedrock-proxy`) — 노트 생성된 세션에만 존재
+  - **제목 키워드** — 제목 일부 (대소문자 무시). 정확 매칭이 안 될 때 폴백
 - 새 상태: `들음` / `관심` / `스킵` / `미정`
 
 호출 예시:
 ```
-/session-mark aws-summit-seoul-2026 bedrock-deep-dive 관심
+/session-mark aws-summit-seoul-2026 S51 관심          # ID 기반 (권장)
+/session-mark aws-summit-seoul-2026 캐치테이블 관심   # 제목 키워드 폴백
 ```
 
 ## 처리 흐름
 
 1. `artifacts/conferences/<행사>/README.md` 읽기
-2. 세션 식별자로 해당 행 찾기 (정확 매칭 → 부분 매칭 순)
+2. 세션 식별자로 해당 행 찾기 — 다음 순서로 매칭 시도:
+   1. **세션 ID 정확 매칭** (`S\d+` 패턴 우선)
+   2. **세션 슬러그 정확 매칭** (`sessions/<slug>.md` 와 동일한 형식)
+   3. **제목 키워드 부분 매칭** (대소문자 무시)
 3. 그 행의 상태 컬럼을 새 상태로 갱신
 4. README 상단 진척 카운트(들음/관심/미정/스킵) 재계산
 5. 파일 저장

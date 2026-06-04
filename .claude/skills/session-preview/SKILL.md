@@ -1,6 +1,6 @@
 ---
 name: session-preview
-description: 한 세션의 메타데이터 + 상태 + 노트 TL;DR(있으면)을 빠르게 조회할 때 호출. 사용자가 "/session-preview <행사> <세션>", "이 세션 미리보기", "어떤 세션인지 봐줘" 등을 요청하면 작동. 세션 수가 많아 특정 세션만 빠르게 점검할 때 유용.
+description: 한 세션의 메타데이터 + 상태 + 노트 TL;DR(있으면)을 빠르게 조회할 때 호출. 사용자가 "/session-preview <행사> <세션 ID|제목 키워드>", "이 세션 미리보기", "S51 어떤 세션이야?" 등을 요청하면 작동. 세션 수가 많아 특정 세션만 빠르게 점검할 때 유용.
 ---
 
 # session-preview
@@ -10,20 +10,28 @@ description: 한 세션의 메타데이터 + 상태 + 노트 TL;DR(있으면)을
 ## 입력
 
 - 행사 슬러그
-- 세션 식별자 (세션 슬러그 또는 제목 일부)
+- 세션 식별자 — 다음 중 하나:
+  - **세션 ID** (`S1` ~ `SN`) — README 표의 ID 컬럼 값. **가장 권장**
+  - **세션 슬러그** (`catchtable-bedrock-proxy`) — 노트 생성된 세션에만 존재
+  - **제목 키워드** — 제목 일부 (대소문자 무시)
 
 호출 예시:
 ```
-/session-preview aws-summit-seoul-2026 bedrock-deep-dive
+/session-preview aws-summit-seoul-2026 S51            # ID 기반 (권장)
+/session-preview aws-summit-seoul-2026 캐치테이블     # 제목 키워드
 ```
 
 ## 처리 흐름
 
-1. `artifacts/conferences/<행사>/README.md` 에서 해당 세션 행 찾기 → 메타데이터·상태 확보
-2. `artifacts/conferences/<행사>/sessions/<세션>.md` 확인:
+1. `artifacts/conferences/<행사>/README.md` 에서 해당 세션 행 찾기 — 다음 순서로 매칭:
+   1. **세션 ID 정확 매칭** (`S\d+` 패턴 우선)
+   2. **세션 슬러그 정확 매칭**
+   3. **제목 키워드 부분 매칭** (대소문자 무시)
+2. 메타데이터·상태 확보
+3. `artifacts/conferences/<행사>/sessions/<세션 슬러그>.md` 확인:
    - 파일 있으면 → frontmatter + TL;DR 섹션 읽기
    - 파일 없으면 → "아직 학습 노트 없음" 표시
-3. 압축 미리보기 형식으로 출력
+4. 압축 미리보기 형식으로 출력
 
 ## 출력 형식
 

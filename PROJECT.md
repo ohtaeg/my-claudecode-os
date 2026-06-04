@@ -66,8 +66,17 @@
   - 결정: 제목 검색만, 공백 구분 OR 매칭, 유사어 제안 없음
   - 산출물:
     - `.claude/skills/find-session/SKILL.md` (신규)
-    - `README.md` §6 MVP 조회 영역에 추가
+    - `README.md` §4 표 + §6 MVP 조회 영역에 추가
     - `workflow.md` 3단계 다이어그램·예시에 추가
+- [+] **OS 갭 발견·즉시 메꿈**: `session-mark` 인터페이스 보완 (세션 ID 도입)
+  - 트리거: 세션 제목 전체를 따옴표로 묶어 호출하는 게 비현실적 — 사용자 지적
+  - 결정: 세션 ID(`S1~SN`) 안정 식별자 도입, 제목 키워드 폴백 유지 (A+C 결합안)
+  - 산출물:
+    - `session-mark` / `session-preview` SKILL.md 입력·예시 갱신
+    - `conference-mkreadme` 에이전트에 ID 부여·재발급 금지 로직 추가
+    - `README.md` §4 호출 컬럼 라벨 갱신 (`<세션>` → `<세션 ID\|제목 키워드>`)
+    - `workflow.md` 호출 예시 ID 기반으로 갱신
+    - AWS Summit 2026 README 마이그레이션 (S1~S127 컬럼 소급 부여, 캐치테이블 = S41)
 - [ ] `session-note`: 캐치테이블 세션 YouTube URL 공개 대기 중
   - 검증 포인트: yt-dlp 봇 차단 여부, analyzer 품질
 - [+] **회고 거리 채집** (Day 8 용):

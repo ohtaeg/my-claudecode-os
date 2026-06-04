@@ -249,15 +249,15 @@ Phase 2 ─ 학습 노트 생성
 
 이 OS 의 모든 스킬은 **얇은 가이드** 형태로 짠다. SKILL.md 가 절차를 강요하지 않고 **큰 원칙·판단 기준만** 담고, 분기·예외 처리는 Claude 의 판단에 맡긴다. 외부 인터페이스는 한 줄 입력으로 유지하고, 내부 단계(검증·추출·생성 등)는 SKILL.md 안에서 명확히 분리한다.
 
-| 스킬 | 역할 |
-|---|---|
-| **`conference-import`** | Phase 1 진입점. 얇은 가이드로 sub-agent 3개(`conference-validator` → `conference-parser` → `conference-mkreadme`)를 순차 위임. 단계별 실패 시 그 단계만 재시도 가능 |
-| **`session-note`** | Phase 2 진입점. 얇은 가이드로 sub-agent 3개(`session-fetcher` → `session-analyzer` → `session-mknote`)를 순차 위임. 자막 추출/분석 단계별 재시도 가능 |
-| **`session-mark`** | Phase 1 보조. 세션의 분류 상태 변경 (들음/관심/스킵). 사용자가 가장 자주 호출하게 될 메타 스킬 |
-| **`session-preview`** | 한 세션의 메타데이터 + 상태 + 노트 TL;DR (있으면) 미리보기. 세션 수 많을 때 특정 세션만 빠르게 점검 |
-| **`conference-status`** | 한 행사의 진척 카운트 조회 (예: 들음 12 / 관심 8 / 미정 5). Phase 1 분류 결과를 한 줄로 확인 |
-| **`conference`** | 한 행사의 세션 갯수 + 세션 이름 목록 + 각 세션 상태 조회 (예: `/conference aws-summit-seoul-2026`). 세션 수가 많아 한눈에 상태 보기 어려울 때 활용 |
-| **`find-session`** | 한 행사의 세션 제목 키워드 검색 (공백 구분 OR 매칭, 대소문자 무시). 세션 수가 많아 키워드로 좁힐 때 활용 |
+| 스킬 | 호출 | 역할 |
+|---|---|---|
+| **`conference-import`** | `/conference-import <URL\|텍스트>` | Phase 1 진입점. 얇은 가이드로 sub-agent 3개(`conference-validator` → `conference-parser` → `conference-mkreadme`)를 순차 위임. 단계별 실패 시 그 단계만 재시도 가능 |
+| **`session-note`** | `/session-note <YouTube URL>` | Phase 2 진입점. 얇은 가이드로 sub-agent 3개(`session-fetcher` → `session-analyzer` → `session-mknote`)를 순차 위임. 자막 추출/분석 단계별 재시도 가능 |
+| **`session-mark`** | `/session-mark <컨퍼런스명> <세션 ID\|제목 키워드> <상태>` | Phase 1 보조. 세션의 분류 상태 변경 (들음/관심/스킵). ID(`S1~SN`) 가 1차 식별자, 제목 키워드는 폴백 |
+| **`session-preview`** | `/session-preview <컨퍼런스명> <세션 ID\|제목 키워드>` | 한 세션의 메타데이터 + 상태 + 노트 TL;DR (있으면) 미리보기. 세션 수 많을 때 특정 세션만 빠르게 점검 |
+| **`conference-status`** | `/conference-status <컨퍼런스명>` | 한 행사의 진척 카운트 조회 (예: 들음 12 / 관심 8 / 미정 5). Phase 1 분류 결과를 한 줄로 확인 |
+| **`conference`** | `/conference <컨퍼런스명>` | 한 행사의 세션 갯수 + 세션 이름 목록 + 각 세션 상태 조회. 세션 수가 많아 한눈에 상태 보기 어려울 때 활용 |
+| **`find-session`** | `/find-session <컨퍼런스명> <키워드>` | 한 행사의 세션 제목 키워드 검색 (공백 구분 OR 매칭, 대소문자 무시, 다중 키워드 가능). 세션 수가 많아 키워드로 좁힐 때 활용 |
 
 **도입하지 않을 스킬** (정체성 보호)
 - 행사 자동 검색·세션 추천 — 행사 사이트마다 구조가 달라 일반화 불가, 자동화 욕심은 결국 깨짐

@@ -129,10 +129,10 @@ artifacts/conferences/aws-summit-seoul-2026/
 **사용자** — 행사 README 를 훑으며 마킹
 
 ```
-/session-mark aws-summit-seoul-2026/keynote 들음
-/session-mark aws-summit-seoul-2026/bedrock-deep-dive 관심
-/session-mark aws-summit-seoul-2026/ec2-spot-strategy 관심
-/session-mark aws-summit-seoul-2026/networking-101 스킵
+/session-mark aws-summit-seoul-2026 S1 들음
+/session-mark aws-summit-seoul-2026 S15 관심
+/session-mark aws-summit-seoul-2026 S22 관심
+/session-mark aws-summit-seoul-2026 S30 스킵
 ...
 ```
 
@@ -157,7 +157,7 @@ artifacts/conferences/aws-summit-seoul-2026/
 /conference aws-summit-seoul-2026
 → 25개 세션 이름 + 각 세션 상태 표
 
-/session-preview aws-summit-seoul-2026/bedrock-deep-dive
+/session-preview aws-summit-seoul-2026 S15
 → 세션 메타데이터 + 상태 + 노트 TL;DR (아직 노트 없으면 "노트 없음")
 
 /find-session aws-summit-seoul-2026 Bedrock Kiro
