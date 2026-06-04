@@ -1,0 +1,6 @@
+{"ts": "2026-06-04T11:00:00Z", "skill": "interview", "action": "started", "details": {"slug": "youtube-transcript-fetch", "source": "user"}}
+{"ts": "2026-06-04T11:05:00Z", "skill": "interview", "action": "dormant", "details": {"slug": "youtube-transcript-fetch", "rounds": 1, "source": "user (좁힌 새 인터뷰로 이어감)"}}
+{"ts": "2026-06-04T11:05:30Z", "skill": "interview", "action": "started", "details": {"slug": "fetcher-fallback-guide", "source": "user (youtube-transcript-fetch R0 좁힘)"}}
+{"ts": "2026-06-04T11:10:00Z", "skill": "interview", "action": "decision_reached", "details": {"slug": "fetcher-fallback-guide", "rounds": 3, "source": "user (youtube-transcript-fetch R0 좁힘)"}}
+{"ts": "2026-06-04T13:23:36Z", "skill": "interview", "action": "started", "details": {"slug": "youtube-transcript-fetch-redux", "source": "user (같은 의도 재호출)"}}
+{"ts": "2026-06-04T13:23:37Z", "skill": "interview", "action": "dormant", "details": {"slug": "youtube-transcript-fetch-redux", "rounds": 1, "source": "user (중간 종료 - 일단 중단)"}}
