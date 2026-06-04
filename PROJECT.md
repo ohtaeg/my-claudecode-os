@@ -90,8 +90,19 @@
   - 트리거: 단일 7행 표가 분류 정체성 약하게 보임 + 본인이 스킬 카운트를 잘못 셌음 (8개라고 함, 실제 7개) — 사용자 정정
   - 결정: 등록 → 분류 → 노트 → 조회 4 미니 표로 분할. 각 그룹 헤더에 이모지·Phase 라벨
   - 산출물: `README.md` §4
-- [ ] `session-note`: 캐치테이블 세션 YouTube URL 공개 대기 중
-  - 검증 포인트: yt-dlp 봇 차단 여부, analyzer 품질
+- [x] `session-note` 첫 가동 (S116 슬롯)
+  - 입력 URL: `https://www.youtube.com/watch?v=u8EZ5QMk8Fc`
+  - 폴백 다중 발생:
+    1. fetcher: yt-dlp 봇 차단 (HTTP 429, 우회 3종 실패)
+    2. 사용자 외부 사이트(`downsub.com`)로 한국어 transcript 다운로드 → `artifacts/.../transcripts/S116-woowa-nova2-production.txt` 저장
+    3. analyzer 단계부터 재개 (한국어 자막 입력)
+  - **강제 매핑 케이스**: 영상 실제 내용 ≠ S116 마킹 제목
+    - S116 마킹: "우아한형제들의 Nova 2 프로덕션 적용 여정" (장재주)
+    - 영상 실제: "1000여 대의 데이터베이스서비스 우아하게 운영하기" (김정곤·오윤택, 2025-08-14 업로드)
+    - 처리: frontmatter title은 S116 마킹 제목 유지, speaker·본문은 영상 실제 기준, 노트 머리에 `> [매핑 노트]` 블록으로 미스매치 박제
+  - 산출물: `sessions/woowa-nova2-production.md` (TL;DR + 인사이트 9 + 태그 10), README S116 행 노트 컬럼 갱신
+- [ ] `session-note` 정상 흐름 첫 가동 (캐치테이블 S41 등 매핑 일치 케이스)
+  - 검증 포인트: yt-dlp 봇 차단 여부, analyzer 품질, 매핑 일치 시 frontmatter 처리
 - [+] **회고 거리 채집** (Day 8 용):
   - 인자 누락 시 폴백 가이드 부재 (`/conference-status`, `/conference` 공통)
   - `/conference` 출력 길이 (미정 多수 시 UX 갭)
@@ -99,6 +110,13 @@
   - **새 스킬·인터페이스 변경 시 갱신 매트릭스 부재** — README §4 / §6 / workflow / 각 SKILL.md 동기화가 산발적으로 누락 (find-session 추가 시 §4 표 누락, ID 도입 시 `/conference`·`/find-session` 출력 형식 누락 등 반복 발생)
   - Bash 도구 cwd persist + 상대 경로 훅 = 깨짐 패턴 (해결됨, 박제용)
   - 본인의 스킬 카운트·분류 실수 (8개라고 잘못 셈) — 사용자 정정으로 발견. OS 정체성 내재화 부족 표지
+  - **`session-note` 첫 가동(S116) 채집** ↓
+    - `session-analyzer` 가이드는 "영어 자막 우선" 이나 한국어 transcript 입력 케이스 처리 명시 부재 — 한국어 그대로 받아도 동작은 가능했음. 가이드 보완 필요
+    - `session-fetcher` 폴백 가이드에 "transcript 복붙" 외에 **"외부 자막 다운로드 사이트(`downsub.com` 등) → 파일 저장"** 경로 추가 검토
+    - 자막 저장 위치 안내가 사용자에게 명확히 전달 안 됨 (`examples/` vs `artifacts/`) — 사용자 첫 시도는 examples 하위, 이후 이동 필요
+    - **강제 매핑 케이스 처리 정책 부재** — URL과 마킹 세션 컨텍스트가 다를 때(URL 매핑 오류·잘못된 영상 등) 본문/frontmatter/노트 머리 안내 표준 규칙 없음. 이번엔 임시로 "frontmatter title은 마킹 제목, speaker·본문은 영상 실제, 머리에 `[매핑 노트]` 블록" 적용
+    - **노트 생성 후 상태 전이 정책 부재** — 노트가 생기면 `관심 → 들음` 으로 자동 전이할지 여부 미정. 현재는 사용자가 별도로 `/session-mark` 호출해야 함
+    - **fetcher 초기 메타데이터로 매핑 검증 가능** — fetcher가 영상 제목·업로드 날짜를 미리 추출해 "마킹 세션과 다를 수 있음" 을 조기에 알린 패턴 좋았음. 표준화 가치
 
 ---
 

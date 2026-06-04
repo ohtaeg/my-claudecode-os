@@ -1,0 +1,4 @@
+{"ts": "2026-05-29T10:07:35Z", "skill": "conference-import", "action": "import", "details": {"slug": "aws-summit-seoul-2026", "sessions_total": 127, "source": "fallback", "note": "비공식 API 발견 — examples/aws-summit-seoul-2026/import-case.md 참조"}}
+{"ts": "2026-06-04T00:44:38Z", "skill": "session-mark", "action": "mark", "details": {"slug": "aws-summit-seoul-2026", "session": "catchtable-claudecode-on-bedrock-proxy", "from": "미정", "to": "관심"}}
+{"ts": "2026-06-04T00:00:00Z", "skill": "session-mark", "action": "mark", "details": {"slug": "aws-summit-seoul-2026", "session": "S116", "from": "미정", "to": "관심"}}
+{"ts": "2026-06-04T00:00:00Z", "skill": "session-note", "action": "note_created", "details": {"slug": "aws-summit-seoul-2026", "session": "woowa-nova2-production", "url": "https://www.youtube.com/watch?v=u8EZ5QMk8Fc", "source": "fallback"}}
