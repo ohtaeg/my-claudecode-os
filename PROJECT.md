@@ -77,12 +77,28 @@
     - `README.md` §4 호출 컬럼 라벨 갱신 (`<세션>` → `<세션 ID\|제목 키워드>`)
     - `workflow.md` 호출 예시 ID 기반으로 갱신
     - AWS Summit 2026 README 마이그레이션 (S1~S127 컬럼 소급 부여, 캐치테이블 = S41)
+    - 후속: `/conference` + `/find-session` SKILL.md 출력 형식에 ID 컬럼 추가 (가이드↔실제 정합)
+- [+] **사용자 요청 즉시 반영**: `git-commit` 스킬에 자동 push 정책 추가
+  - 트리거: 사용자 명시 요청
+  - 결정: 커밋 직후 `git push` 자동 실행. 안전 가드(force-push / `--no-verify` / 다른 브랜치 push 금지) 유지
+  - 산출물: `.claude/skills/git-commit/SKILL.md` (§3.1 신설, §4 금지 사항 갱신, 체크리스트 보강)
+- [+] **버그픽스**: `settings.json` 훅 경로를 cwd 무관하게 보강
+  - 트리거: 마이그레이션 작업 중 내가 `cd` 명령을 써서 cwd 가 영구 변경됨 → PreToolUse 훅(상대 경로 `.claude/hooks/*.sh`) 이 ENOENT 로 깨짐. 사용자 신고로 발견
+  - 결정: `$CLAUDE_PROJECT_DIR` 사용으로 cwd 무관 동작 (이식성 유지)
+  - 산출물: `.claude/settings.json`
+- [+] **문서 정합**: `README.md` §4 표 4그룹 분할 (등록/분류/노트/조회)
+  - 트리거: 단일 7행 표가 분류 정체성 약하게 보임 + 본인이 스킬 카운트를 잘못 셌음 (8개라고 함, 실제 7개) — 사용자 정정
+  - 결정: 등록 → 분류 → 노트 → 조회 4 미니 표로 분할. 각 그룹 헤더에 이모지·Phase 라벨
+  - 산출물: `README.md` §4
 - [ ] `session-note`: 캐치테이블 세션 YouTube URL 공개 대기 중
   - 검증 포인트: yt-dlp 봇 차단 여부, analyzer 품질
 - [+] **회고 거리 채집** (Day 8 용):
   - 인자 누락 시 폴백 가이드 부재 (`/conference-status`, `/conference` 공통)
   - `/conference` 출력 길이 (미정 多수 시 UX 갭)
   - `session-preview` 의 URL/태그 필드 비어있음 → `conference-import` 가 상세 URL 미저장
+  - **새 스킬·인터페이스 변경 시 갱신 매트릭스 부재** — README §4 / §6 / workflow / 각 SKILL.md 동기화가 산발적으로 누락 (find-session 추가 시 §4 표 누락, ID 도입 시 `/conference`·`/find-session` 출력 형식 누락 등 반복 발생)
+  - Bash 도구 cwd persist + 상대 경로 훅 = 깨짐 패턴 (해결됨, 박제용)
+  - 본인의 스킬 카운트·분류 실수 (8개라고 잘못 셈) — 사용자 정정으로 발견. OS 정체성 내재화 부족 표지
 
 ---
 
