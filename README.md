@@ -296,7 +296,7 @@ Phase 2 ─ 학습 노트 생성
 ### 🎯 MVP (지금 만들 것)
 - Phase 1: `conference-import` + `session-mark` → 행사 README 박제
 - Phase 2: `session-note` → 세션 노트 박제
-- 조회: `conference-status` (한 행사 진척 카운트) + `conference` (한 행사 세션 목록·상태) + `session-preview` (한 세션 미리보기)
+- 조회: `conference-status` (한 행사 진척 카운트) + `conference` (한 행사 세션 목록·상태) + `session-preview` (한 세션 미리보기) + `find-session` (한 행사 안 키워드 검색)
 - 첫 행사: AWS Summit Seoul 2026
 - 첫 입력 형태: 컨퍼런스 페이지 URL + 세션 YouTube URL
 

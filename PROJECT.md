@@ -49,11 +49,6 @@
 
 ## 다음 단계 (계획)
 
-### [ ] Day 7 — Phase 2 실전 가동
-- `session-mark` 로 관심 세션 몇 개 선별
-- `session-note` 로 첫 학습 노트 생성 (YouTube 영상 공개 후 / 가능하면 다른 행사로 먼저)
-- 자막 추출·분석 흐름 실전 검증 (yt-dlp 봇 차단 여부, analyzer 품질)
-
 ### [ ] Day 8 — 첫 회고
 - 잘 된 것
 - 어색한 것 (스킬 호출 자연스러움 / 폴백 흐름 / 노트 품질)
@@ -63,7 +58,22 @@
 
 ## 진행 중
 
-(현재 진행 중 없음 — Day 6 까지 완료)
+### Day 7 — Phase 2 실전 가동 (진행 중, 2026-06-04 ~)
+- [x] `session-mark`: 캐치테이블 세션 1개 "관심" 마킹 (`catchtable-claudecode-on-bedrock-proxy`)
+- [x] 조회 스킬 3종 첫 가동: `/conference-status`, `/conference`, `/session-preview`
+- [+] **OS 갭 발견·즉시 메꿈**: `find-session` 스킬 추가
+  - 트리거: 127 세션 중 키워드로 좁히는 흐름 필요 — Day 7 진행 중 직접 발견
+  - 결정: 제목 검색만, 공백 구분 OR 매칭, 유사어 제안 없음
+  - 산출물:
+    - `.claude/skills/find-session/SKILL.md` (신규)
+    - `README.md` §6 MVP 조회 영역에 추가
+    - `workflow.md` 3단계 다이어그램·예시에 추가
+- [ ] `session-note`: 캐치테이블 세션 YouTube URL 공개 대기 중
+  - 검증 포인트: yt-dlp 봇 차단 여부, analyzer 품질
+- [+] **회고 거리 채집** (Day 8 용):
+  - 인자 누락 시 폴백 가이드 부재 (`/conference-status`, `/conference` 공통)
+  - `/conference` 출력 길이 (미정 多수 시 UX 갭)
+  - `session-preview` 의 URL/태그 필드 비어있음 → `conference-import` 가 상세 URL 미저장
 
 ---
 

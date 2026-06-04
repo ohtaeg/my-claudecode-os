@@ -31,7 +31,8 @@
                        ▼
 ┌────────────────────────────────────────────────────┐
 │ 3단계 · 조회 (필요 시)                            │
-│   /conference-status, /conference, /session-preview│
+│   /conference-status, /conference,                │
+│   /session-preview, /find-session                 │
 └────────────────────────────────────────────────────┘
                        │
                        ▼
@@ -158,6 +159,9 @@ artifacts/conferences/aws-summit-seoul-2026/
 
 /session-preview aws-summit-seoul-2026/bedrock-deep-dive
 → 세션 메타데이터 + 상태 + 노트 TL;DR (아직 노트 없으면 "노트 없음")
+
+/find-session aws-summit-seoul-2026 Bedrock Kiro
+→ 제목에 "Bedrock" 또는 "Kiro" 포함된 세션만 표로 필터
 ```
 
 이 단계는 필요할 때 호출. Golden path 의 필수 단계는 아님.
